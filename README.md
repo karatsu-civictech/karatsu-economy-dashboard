@@ -1,5 +1,7 @@
 # 唐津市 経済動向ダッシュボード
 
+🌐 **公開URL: https://karatsu-civictech.org/keizai/**
+
 唐津市が公開している月次経済動向データ（2010年〜）を、**BIツールのようにソート・フィルター・グラフ**で自由に閲覧できる可視化Webアプリです。シビックテックによる非公式プロジェクト。
 
 元データはGoogleスプレッドシートの表形式（指標が縦、年が横、月ごとにタブ）で視認性が低いため、これを構造化データに変換し、誰でも直感的に動向を読み取れるようにしています。
@@ -10,7 +12,15 @@
 - **集計切替**: 単月（任意の月）/ 年平均 / 年合計
 - **テーブル**: 列見出しクリックで並べ替え、最大・最小・直近増減を併記、**CSVダウンロード**
 - **グラフ**: 年次/月次の折れ線、複数指標の重ね合わせ、単位が異なる指標を比べるための**指数化（基準=100）**、コロナ影響期（2020〜2021年）のハイライト
-- 完全な静的サイト（サーバ不要）。Cloudflare Pages / GitHub Pages / Vercel などに無料でデプロイ可能
+- 完全な静的サイト（サーバ不要）。Cloudflare Pages にデプロイ
+
+## 公開構成
+
+`karatsu-civictech.org` はパス方式のマルチアプリ構成です。ハブのルーター Worker
+（`civic-tech-karatsu` リポジトリ内 `worker/`）が `/keizai/*` をこのプロジェクトの
+Pages（`karatsu-economy-dashboard.pages.dev`）へ転送し、`/keizai` プレフィックスを除去します。
+そのため本アプリは **`vite.config.ts` の `base: "/keizai/"`** でビルドする必要があります
+（`pages.dev` への直接アクセスではなく `karatsu-civictech.org/keizai/` 経由で閲覧してください）。
 
 ## データ
 
@@ -41,7 +51,8 @@ npm run preview         # ビルド結果をローカル確認
 
 ```bash
 npm run data    # 12タブを再取得して public/data.json を再生成
-npm run build   # 再ビルド
+npm run build   # 再ビルド (base:/keizai/ で出力)
+npx wrangler pages deploy dist --project-name=karatsu-economy-dashboard --branch=main
 ```
 
 `scripts/build-data.mjs` がCSVを取得・整形します。スプレッドシートのID・タブ(gid)対応もこのファイル内で定義しています。
