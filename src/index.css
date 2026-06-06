@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  font-family: ui-sans-serif, system-ui, "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+    "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: #f4f6f9;
+  color: #1f2937;
+}
+
+/* 数値の桁を揃える */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
