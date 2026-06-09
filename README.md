@@ -1,6 +1,6 @@
 # 唐津市 経済動向ダッシュボード
 
-🌐 **公開URL: https://karatsu-civictech.org/keizai/**
+🌐 **公開URL: https://civictech-karatsu.org/keizai/**
 
 唐津市が公開している月次経済動向データ（2010年〜）を、**BIツールのようにソート・フィルター・グラフ**で自由に閲覧できる可視化Webアプリです。シビックテックによる非公式プロジェクト。
 
@@ -16,11 +16,11 @@
 
 ## 公開構成
 
-`karatsu-civictech.org` はパス方式のマルチアプリ構成です。ハブのルーター Worker
+`civictech-karatsu.org` はパス方式のマルチアプリ構成です。ハブのルーター Worker
 （`civic-tech-karatsu` リポジトリ内 `worker/`）が `/keizai/*` をこのプロジェクトの
 Pages（`karatsu-economy-dashboard.pages.dev`）へ転送し、`/keizai` プレフィックスを除去します。
 そのため本アプリは **`vite.config.ts` の `base: "/keizai/"`** でビルドする必要があります
-（`pages.dev` への直接アクセスではなく `karatsu-civictech.org/keizai/` 経由で閲覧してください）。
+（`pages.dev` への直接アクセスではなく `civictech-karatsu.org/keizai/` 経由で閲覧してください）。
 
 ## データ
 
